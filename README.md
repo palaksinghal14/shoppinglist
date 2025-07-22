@@ -1,0 +1,1 @@
+ This is a basic practise app to maintain the list for shopping. 
