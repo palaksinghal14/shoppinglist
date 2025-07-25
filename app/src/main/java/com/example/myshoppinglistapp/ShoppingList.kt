@@ -19,6 +19,8 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
@@ -31,6 +33,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -184,21 +187,38 @@ fun shoppingitemeditor(item:ShoppingItem,
     var editedname by remember { mutableStateOf(item.name) }
     var editedquantity by remember { mutableStateOf(item.quantity.toString()) }
     var isediting by remember { mutableStateOf(item.isediting) }
-    Row {
-        Column {
-            BasicTextField(value = editedname , onValueChange = {editedname=it} ) {
+    Card(modifier = Modifier.padding(4.dp)
+        .fillMaxWidth(),
+        shape = RoundedCornerShape(12.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
+    ) {
+            Column(verticalArrangement = Arrangement.SpaceEvenly,
+                   horizontalAlignment = Alignment.Start,
+                    modifier = Modifier.padding(4.dp)
+                                       .fillMaxWidth())
+            {
+                OutlinedTextField(value = editedname,
+                    onValueChange = {editedname=it},
+                    modifier = Modifier.padding(4.dp)
+                )
 
+                OutlinedTextField(value = editedquantity,
+                    onValueChange = {editedquantity=it},
+                    modifier = Modifier.padding(4.dp)
+                    )
+
+                Button(onClick = {
+                    isediting=false
+                    oneditcomplete(editedname,editedquantity.toIntOrNull() ?: 1) },
+                    modifier=Modifier.padding(4.dp)
+                        .align(Alignment.End)
+                        ) {
+                    Text(text = "save")
+                }
             }
-           BasicTextField(value = editedquantity, onValueChange = {editedquantity=it}) {
 
-           }
-        }
-        Button(onClick = {
-            isediting=false
-            oneditcomplete(editedname,editedquantity.toIntOrNull() ?: 1)
-        }) {
-            Text(text = "save")
         }
     }
-}
+
+
 
