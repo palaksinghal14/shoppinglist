@@ -111,6 +111,7 @@ fun shoppinglistapp() {
                         )
                         list=list+newitem // .add will not be use because that will not internally change the list
                         showdialog=false  // so that after adding the element , alertdialog gets off
+                        itemquantity=""
                         itemname=""// declaring its empty again otherwise this if blocks run again and again
                     }
 
